@@ -4,8 +4,9 @@ from django.db import models
 
 
 class Mantenimientos(models.Model):
-    codigo = models.CharField(max_length=50)
-    categoria = models.CharField(max_length=100)
+    id = models.AutoField(primary_key=True)
+    codigo = models.CharField(max_length=50,null=True)
+    categoria = models.CharField(max_length=100,null=True)
     enable = models.IntegerField(default=1)
     descripcion = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

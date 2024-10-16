@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'drf_yasg',
     'api',
     'mantenimientos',
-    'centrogestion'
+    'centrogestion',
+    'dwperu'
 ]
-
 
 
 MIDDLEWARE = [
@@ -102,6 +102,17 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT"),
         'OPTIONS': {
             'options': f"-c search_path={os.getenv('DB_SCHEMA_APP')}",
+        }
+    },
+    'dw_peru': {
+        'ENGINE': os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_DATABASE_DW_PE"),
+        'USER': os.getenv("DB_USERNAME_DW_PE"),
+        'PASSWORD': os.getenv("DB_PASSWORD_DW_PE"),
+        'HOST': os.getenv("DB_HOST_DW"),
+        'PORT': os.getenv("DB_PORT"),
+        'OPTIONS': {
+            'options': f"-c search_path={os.getenv('DB_SCHEMA_DWPE')}",
         }
     },
 }

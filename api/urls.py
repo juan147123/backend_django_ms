@@ -23,4 +23,5 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/', include('mantenimientos.urls')),
     path('api/', include('centrogestion.urls')),
+    path('api/', include('dwperu.urls')),
 ]

@@ -10,30 +10,54 @@ class CentroGestionViewSet(viewsets.ModelViewSet):
     serializer_class = CentroGestionSerializer
     queryset = CentroGestion.objects.all()
 
-    def build_tree(self, node, parent_key='0', order=0):
-        node_data = CentroGestionSerializer(node).data
-        if node.parent is None:
-            current_key = f"{parent_key}" if parent_key else str(node.id)
-            node_data['order'] = f"{parent_key}" 
-        else:
-            current_key = f"{parent_key}-{node.id}" if parent_key else str(node.id)
-            node_data['order'] = f"{parent_key}-{order}" 
-
-        node_data['key'] = current_key
-
+    def build_tree(self, nodes, parent_key=None):
+        tree = []
         
-        children = CentroGestion.objects.filter(parent=node)
-        if children.exists():
-            # Generar el árbol para los hijos, pasando el índice como el número de orden
-            node_data['children'] = [
-                self.build_tree(child, current_key, index) for index, child in enumerate(children)
-            ]
-        
-        return node_data
+        for index, node in enumerate(nodes):
+            # Serializar los datos del nodo actual
+            node_data = CentroGestionSerializer(node).data
+            
+            if parent_key is None:
+                # Asignar key a los nodos raíz como "0", "1", "2", etc.
+                current_key = str(index)
+            else:
+                # Formar el key basado en el parent_key y el index
+                current_key = f"{parent_key}-{index}"
+            
+            node_data['key'] = current_key
+
+            # Buscar hijos del nodo actual
+            children = CentroGestion.objects.filter(parent=node, enable=1).order_by('id')  # Asegurar un orden consistente por ID
+            if children.exists():
+                # Generar el árbol para los hijos
+                node_data['children'] = self.build_tree(children, current_key)
+
+            tree.append(node_data)
+
+        return tree
 
     @action(detail=False, methods=['get'], url_path='tree')
     def list_centro_gestion(self, request):
-        root_nodes = CentroGestion.objects.filter(parent__isnull=True)
-        tree = [self.build_tree(node) for node in root_nodes]
+        # Obtener nodos raíz que están habilitados
+        root_nodes = CentroGestion.objects.filter(parent__isnull=True, enable=1).order_by('id')
+        
+        # Llamar a build_tree pasando el queryset de nodos raíz
+        tree = self.build_tree(root_nodes)
+
         return Response(tree)
+    
+        
+    @action(detail=False, methods=['delete'], url_path='logical/delete/(?P<id>[^/.]+)')
+    def logical_delete(self,request, id=None):
+        try:
+            mantenimiento = CentroGestion.objects.get(id=id)
+            mantenimiento.enable = 0
+            mantenimiento.save()
+            return Response({'delete': 1})
+        except CentroGestion.DoesNotExist:
+            return Response({'error': 'Mantenimiento no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:  
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+    
 
