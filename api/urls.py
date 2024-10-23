@@ -8,7 +8,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="API matrices sig",
         default_version='v1',
-        description="Documentación de la API",
+        description="Flesan Gestión - Desarrollo",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="jmestanza@flesan.com.pe"),
         license=openapi.License(name="BSD License"),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/', include('mantenimientos.urls')),
     path('api/', include('centrogestion.urls')),
     path('api/', include('dwperu.urls')),
+    path('api/', include('seguridad.urls')),
 ]

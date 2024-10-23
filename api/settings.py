@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'api',
     'mantenimientos',
     'centrogestion',
+    'seguridad',
     'dwperu'
 ]
 
@@ -113,6 +114,17 @@ DATABASES = {
         'PORT': os.getenv("DB_PORT"),
         'OPTIONS': {
             'options': f"-c search_path={os.getenv('DB_SCHEMA_DWPE')}",
+        }
+    },
+    'seguridadapp': {
+        'ENGINE': os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_DATABASE_SECURITY"),
+        'USER': os.getenv("DB_USERNAME_SECURITY"),
+        'PASSWORD':os.getenv("DB_PASSWORD_SECURITY"),
+        'HOST':os.getenv("DB_HOST_SECURITY"),
+        'PORT': os.getenv("DB_PORT"),
+        'OPTIONS': {
+            'options': f"-c search_path={os.getenv('DB_SCHEMA_SECURITY')}", 
         }
     },
 }
