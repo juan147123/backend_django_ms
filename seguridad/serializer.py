@@ -1,10 +1,7 @@
 from rest_framework import serializers
 from .models import  AplicacionUsuario, RolAplicacion, UsuarioRol
 
-class AplicacionUsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AplicacionUsuario
-        fields = '__all__'
+
 
 class RolAplicacionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,6 +10,13 @@ class RolAplicacionSerializer(serializers.ModelSerializer):
 
 
 class UsuarioRolSerializer(serializers.ModelSerializer):
+    id_rol = RolAplicacionSerializer() 
     class Meta:
         model = UsuarioRol
         fields = '__all__'  
+
+class AplicacionUsuarioSerializer(serializers.ModelSerializer):
+    usuariorol_set = UsuarioRolSerializer(many=True, read_only=True)
+    class Meta:
+        model = AplicacionUsuario
+        fields = '__all__'

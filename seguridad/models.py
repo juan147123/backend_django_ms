@@ -31,11 +31,11 @@ class RolAplicacion(models.Model):
 class UsuarioRol(models.Model):
     id_usuario_rol = models.BigAutoField(primary_key=True)
     id_aplicacion_usuario = models.ForeignKey(AplicacionUsuario, models.DO_NOTHING, db_column='id_aplicacion_usuario')
-    id_rol = models.IntegerField()
+    id_rol = models.ForeignKey(RolAplicacion, models.DO_NOTHING, db_column='id_rol')
     objeto_permitido = models.CharField(max_length=5120, blank=True, null=True)
     pais = models.CharField(max_length=10, blank=True, null=True)
     estado = models.IntegerField(default=1)
-
+    fecha_ini = models.DateField(auto_now_add=True)
     class Meta:
         managed = False
         db_table = 'usuario_rol'
