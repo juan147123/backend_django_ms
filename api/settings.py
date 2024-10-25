@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'mantenimientos',
     'centrogestion',
     'seguridad',
+    'riesgosoportunidades',
+    'controles',
     'dwperu'
 ]
 

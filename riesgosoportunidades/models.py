@@ -1,0 +1,25 @@
+from django.db import models
+from mantenimientos.models import Mantenimientos
+
+class RiesgosOportunidades(models.Model):
+    id_encabezado = models.IntegerField(blank=True, null=True)
+    cod_riesgo = models.CharField(max_length=255)
+    tipo_riesgo = models.CharField(max_length=255)
+    proceso = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    id_partes_externas = models.ForeignKey(
+        Mantenimientos, models.DO_NOTHING, db_column='id_partes_externas')
+    id_amenaza_oportunidad = models.ForeignKey(
+        Mantenimientos, models.DO_NOTHING, db_column='id_amenaza_oportunidad', related_name='riesgosoportunidades_id_amenaza_oportunidad_set')
+    id_fortaleza_debilidad = models.ForeignKey(
+        Mantenimientos, models.DO_NOTHING, db_column='id_fortaleza_debilidad', related_name='riesgosoportunidades_id_fortaleza_debilidad_set')
+    enable = models.IntegerField(default=1)
+    id_cege = models.IntegerField(null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'riesgos_oportunidades'
+
+    def get_controles(self):
+        from controles.models import Controles 
+        return Controles.objects.filter(id_riesgo_oportunidad=self)
