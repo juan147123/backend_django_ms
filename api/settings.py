@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-r#$!#dfm14^bf%0$55cnh5x(=qt=*uyn%d@htxgdi5^#iyp79)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", os.getenv("HOST")]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", os.getenv("HOST"),"qamatricessigbackend.grupoflesan.com"]
 
 
 # Application definition
@@ -73,6 +73,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     os.getenv("WEB_HOST"),
+    "qamatricessig.grupoflesan.com"
 ]
 
 ROOT_URLCONF = 'api.urls'
