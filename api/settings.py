@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'riesgosoportunidades',
     'controles',
     'encabezado',
+    'evaluacion',
     'dwperu'
 ]
 
