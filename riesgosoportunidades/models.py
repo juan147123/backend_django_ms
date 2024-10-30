@@ -22,4 +22,16 @@ class RiesgosOportunidades(models.Model):
 
     def get_controles(self):
         from controles.models import Controles 
-        return Controles.objects.filter(id_riesgo_oportunidad=self)
+        return Controles.objects.filter(id_riesgo_oportunidad=self,enable=1)
+
+    def get_evaluaciones(self):
+        from evaluacion.models import Evaluacion 
+        return Evaluacion.objects.filter(id_riesgo_oportunidad=self,enable=1)
+
+    def get_tratamientos(self):
+        from tratamiento.models import Tratamiento 
+        return Tratamiento.objects.filter(id_riesgo_oportunidad=self,enable=1)
+    
+    def get_eficacias(self):
+        from eficacia.models import Eficacia 
+        return Eficacia.objects.filter(id_riesgo_oportunidad=self,enable=1)
