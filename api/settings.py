@@ -73,7 +73,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     os.getenv("WEB_HOST"),
-    "qamatricessig.grupoflesan.com"
+    "https://qamatricessig.grupoflesan.com"
 ]
 
 ROOT_URLCONF = 'api.urls'
