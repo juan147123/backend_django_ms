@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'controles',
     'encabezado',
     'evaluacion',
+    'tratamiento',
     'dwperu'
 ]
 
