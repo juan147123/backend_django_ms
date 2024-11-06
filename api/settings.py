@@ -17,9 +17,8 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-dotenv_path = join(BASE_DIR, '.env')
+dotenv_path ='/var/www/django/matrices_sig/backend_django_ms/.env'
 load_dotenv(dotenv_path)
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -73,7 +72,8 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     os.getenv("WEB_HOST"),
-    "https://qamatricessig.grupoflesan.com"
+    "https://qamatricessig.grupoflesan.com",
+    "http://localhost:5173"
 ]
 
 ROOT_URLCONF = 'api.urls'
