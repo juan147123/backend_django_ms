@@ -16,8 +16,8 @@ class EvaluacionViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.request.method == 'GET':
-            return EvaluacionSerializer
-        return EvaluacionReadSerializer  
+            return EvaluacionReadSerializer
+        return EvaluacionSerializer
 
     @action(detail=False, methods=['delete'], url_path='logical/delete/(?P<id>[^/.]+)')
     def logical_delete(self,request, id=None):
