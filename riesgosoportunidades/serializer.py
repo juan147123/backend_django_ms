@@ -10,8 +10,8 @@ from mantenimientos.serializer import MantenimientosSerializer
 
 class RiesgosOportunidadesReadSerializer(serializers.ModelSerializer):
     # Usamos el serializador de Mantenimientos para anidar los datos
-    id_partes_externas = MantenimientosSerializer()
     id_amenaza_oportunidad = MantenimientosSerializer()
+    id_proceso = MantenimientosSerializer()
     id_fortaleza_debilidad = MantenimientosSerializer()
     controles = serializers.SerializerMethodField()  # Método para obtener controles
     evaluaciones = serializers.SerializerMethodField()  # Método para obtener controles
@@ -36,7 +36,6 @@ class RiesgosOportunidadesReadSerializer(serializers.ModelSerializer):
 
 class RiesgosOportunidadesWriteSerializer(serializers.ModelSerializer):
     # Usamos PrimaryKeyRelatedField para solo recibir los IDs
-    id_partes_externas = serializers.PrimaryKeyRelatedField(queryset=Mantenimientos.objects.all())
     id_amenaza_oportunidad = serializers.PrimaryKeyRelatedField(queryset=Mantenimientos.objects.all())
     id_fortaleza_debilidad = serializers.PrimaryKeyRelatedField(queryset=Mantenimientos.objects.all())
     

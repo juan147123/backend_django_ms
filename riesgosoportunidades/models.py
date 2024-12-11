@@ -5,10 +5,10 @@ class RiesgosOportunidades(models.Model):
     id_encabezado = models.IntegerField(blank=True, null=True)
     cod_riesgo = models.CharField(max_length=255)
     tipo_riesgo = models.CharField(max_length=255)
-    proceso = models.CharField(max_length=255)
+    id_proceso =  models.ForeignKey(
+        Mantenimientos, models.DO_NOTHING, db_column='id_proceso', related_name='riesgosoportunidades_id_proceso_set')
     descripcion = models.TextField()
-    id_partes_externas = models.ForeignKey(
-        Mantenimientos, models.DO_NOTHING, db_column='id_partes_externas')
+    id_partes_externas = models.TextField(blank=True, null=True) 
     id_amenaza_oportunidad = models.ForeignKey(
         Mantenimientos, models.DO_NOTHING, db_column='id_amenaza_oportunidad', related_name='riesgosoportunidades_id_amenaza_oportunidad_set')
     id_fortaleza_debilidad = models.ForeignKey(

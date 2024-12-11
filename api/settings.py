@@ -17,7 +17,9 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-dotenv_path ='/var/www/django/matrices_sig/backend_django_ms/.env'
+# Path to the .env file
+dotenv_path = BASE_DIR / '.env'
+# Load environment variables from the .env file
 load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
