@@ -31,4 +31,5 @@ urlpatterns = [
     path('api/', include('evaluacion.urls')),
     path('api/', include('tratamiento.urls')),
     path('api/', include('eficacia.urls')),
+    path('api/', include('dashboard.urls')),
 ]

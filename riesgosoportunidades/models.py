@@ -1,8 +1,9 @@
 from django.db import models
+from encabezado.models import RiesgosOportunidadesEncabezado
 from mantenimientos.models import Mantenimientos
 
 class RiesgosOportunidades(models.Model):
-    id_encabezado = models.IntegerField(blank=True, null=True)
+    id_encabezado = models.ForeignKey(RiesgosOportunidadesEncabezado, models.DO_NOTHING, db_column='id_encabezado', blank=True, null=True,related_name='riesgosoportunidades')
     cod_riesgo = models.CharField(max_length=255)
     tipo_riesgo = models.CharField(max_length=255)
     id_proceso =  models.ForeignKey(

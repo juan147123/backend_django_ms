@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'evaluacion',
     'eficacia',
     'tratamiento',
-    'dwperu'
+    'dwperu',
+    'dashboard'
 ]
 
 
