@@ -25,7 +25,7 @@ urlpatterns = [
     path('api/', include('centrogestion.urls')),
     path('api/', include('dwperu.urls')),
     path('api/', include('seguridad.urls')),
-    path('api/', include('riesgosoportunidades.urls')),
+    path('api/', include('riesgos.urls')),
     path('api/', include('controles.urls')),
     path('api/', include('encabezado.urls')),
     path('api/', include('evaluacion.urls')),

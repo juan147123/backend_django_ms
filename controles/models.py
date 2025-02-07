@@ -1,6 +1,6 @@
 from django.db import models
 
-from riesgosoportunidades.models import RiesgosOportunidades
+from riesgos.models import RiesgosOportunidades
 
 
 class Controles(models.Model):

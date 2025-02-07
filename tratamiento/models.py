@@ -1,6 +1,6 @@
 from django.db import models
 from mantenimientos.models import Mantenimientos
-from riesgosoportunidades.models import RiesgosOportunidades
+from riesgos.models import RiesgosOportunidades
 
 class Tratamiento(models.Model):
     id_estrategia_tratamiento = models.ForeignKey(

@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'mantenimientos',
     'centrogestion',
     'seguridad',
-    'riesgosoportunidades',
+    'riesgos',
     'controles',
     'encabezado',
     'evaluacion',

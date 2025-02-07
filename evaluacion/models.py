@@ -1,7 +1,7 @@
 from django.db import models
 
 from mantenimientos.models import Mantenimientos
-from riesgosoportunidades.models import RiesgosOportunidades
+from riesgos.models import RiesgosOportunidades
 
 class Evaluacion(models.Model):
     nro_calculo_nivel_eficacia = models.DecimalField(max_digits=4, decimal_places=2)

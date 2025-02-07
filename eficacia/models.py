@@ -1,6 +1,6 @@
 from django.db import models
 
-from riesgosoportunidades.models import RiesgosOportunidades
+from riesgos.models import RiesgosOportunidades
 
 class Eficacia(models.Model):
     fecha_evaluacion = models.DateField()
