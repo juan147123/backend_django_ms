@@ -14,12 +14,18 @@ class MantenimientosViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'], url_path='categoria/(?P<categoria>[^/.]+)')
     def categoria(self, request, categoria=None):
         try:
-            mantenimientos = Mantenimientos.objects.filter(categoria=categoria, enable=1)
-            serializer = self.get_serializer(mantenimientos, many=True)
+            if categoria == 'foop':
+                categorias_permitidas = ['fortaleza', 'oportunidad']
+                mantenimientos = Mantenimientos.objects.filter(categoria__in=categorias_permitidas, enable=1)
+                serializer = MantenimientosSerializer(mantenimientos, many=True)
+            else:
+                mantenimientos = Mantenimientos.objects.filter(categoria=categoria, enable=1)
+                serializer = self.get_serializer(mantenimientos, many=True)
             return Response(serializer.data)
         except Exception as e:
              return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+   
    
     @action(detail=False, methods=['get'], url_path='activos')
     def activos(self, request,  categoria=None):
