@@ -10,6 +10,11 @@ class RiesgosOportunidades(models.Model):
     tipo_riesgo = models.CharField(max_length=255)
     id_proceso = models.ForeignKey(
         Mantenimientos, models.DO_NOTHING, db_column='id_proceso', related_name='riesgosoportunidades_id_proceso_set')
+    id_tipo_riesgo = models.ForeignKey(
+        Mantenimientos, models.DO_NOTHING, db_column='id_tipo_riesgo', related_name='riesgosoportunidades_id_tipo_riesgo_set',null=True, blank=True)
+    id_sistema_gestion = models.ForeignKey(
+        Mantenimientos, models.DO_NOTHING, db_column='id_sistema_gestion', related_name='riesgosoportunidades_id_sistema_gestion_set')
+    id_efecto_consecuencia =models.TextField(blank=True, null=True)
     descripcion = models.TextField()
     objetivo_oportunidad = models.TextField(null=True, blank=True)
     id_partes_externas = models.TextField(blank=True, null=True)
@@ -20,6 +25,7 @@ class RiesgosOportunidades(models.Model):
     enable = models.IntegerField(default=1)
     id_cege = models.IntegerField(null=True)
     id_fortaleza_oportunidad = models.TextField(blank=True, null=True)
+    controles_potenciadores = models.TextField()
 
     class Meta:
         managed = False

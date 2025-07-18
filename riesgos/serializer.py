@@ -13,6 +13,8 @@ class RiesgosOportunidadesReadSerializer(serializers.ModelSerializer):
     # Usamos el serializador de Mantenimientos para anidar los datos
     id_amenaza_oportunidad = MantenimientosSerializer()
     id_proceso = MantenimientosSerializer()
+    id_tipo_riesgo = MantenimientosSerializer()
+    id_sistema_gestion = MantenimientosSerializer()
     id_fortaleza_debilidad = MantenimientosSerializer()
     controles = serializers.SerializerMethodField()  # Método para obtener controles
     evaluaciones = serializers.SerializerMethodField()  # Método para obtener controles
