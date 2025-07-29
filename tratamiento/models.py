@@ -3,6 +3,11 @@ from mantenimientos.models import Mantenimientos
 from riesgos.models import RiesgosOportunidades
 
 class Tratamiento(models.Model):
+    ESTADO_CUMPLIMIENTO_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('cumplido', 'Cumplido'),
+    ]
+    
     id_estrategia_tratamiento = models.ForeignKey(
         Mantenimientos,
         models.DO_NOTHING,
@@ -23,6 +28,12 @@ class Tratamiento(models.Model):
     observaciones = models.TextField(blank=True, null=True)
     id_riesgo_oportunidad = models.ForeignKey(RiesgosOportunidades, models.DO_NOTHING, db_column='id_riesgo_oportunidad', blank=True, null=True)
     enable = models.IntegerField(default=1)
+    estado_cumplimiento = models.CharField(
+        max_length=20,
+        choices=ESTADO_CUMPLIMIENTO_CHOICES,
+        default='pendiente'
+    )
+    
     class Meta:
         managed = False
         db_table = 'tratamiento'

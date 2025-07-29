@@ -18,3 +18,14 @@ class TratamientoReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tratamiento
         fields = '__all__'
+
+
+class TratamientoEstadoCumplimientoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tratamiento
+        fields = ['estado_cumplimiento']
+        
+    def validate_estado_cumplimiento(self, value):
+        if value not in ['pendiente', 'cumplido']:
+            raise serializers.ValidationError("El estado debe ser 'pendiente' o 'cumplido'")
+        return value
