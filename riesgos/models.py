@@ -26,6 +26,7 @@ class RiesgosOportunidades(models.Model):
     id_cege = models.IntegerField(null=True)
     id_fortaleza_oportunidad = models.TextField(blank=True, null=True)
     controles_potenciadores = models.TextField()
+    id_padre = models.TextField()
 
     class Meta:
         managed = False
