@@ -97,6 +97,38 @@ class AplicacionUsuarioViewSet(viewsets.ModelViewSet):
                     unique_users.add(data['id_aplicacion_usuario']) 
 
         return Response(filtered_data, status=status.HTTP_200_OK)
+    
+    @action(detail=False, methods=['delete'], url_path='logical/delete/(?P<id>[^/.]+)')
+    def logical_delete_usuario_rol(self, request, id=None):
+        try:
+            usuario_rol = UsuarioRol.objects.using('seguridadapp').get(id_usuario_rol=id)
+            usuario_rol.estado = 0
+            usuario_rol.save()
+            return Response({'delete': 1})
+        except UsuarioRol.DoesNotExist:
+            return Response({'error': 'Usuario rol no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=['put'], url_path='update-usuario-rol/(?P<id>[^/.]+)')
+    def update_usuario_rol(self, request, id=None):
+        try:
+            usuario_rol = UsuarioRol.objects.using('seguridadapp').get(id_usuario_rol=id)
+            id_rol = request.data.get("id_rol")
+            
+            if id_rol:
+                rol_aplicacion = RolAplicacion.objects.using('seguridadapp').filter(id_rol=id_rol).first()
+                if not rol_aplicacion:
+                    return Response({"error": "Rol no encontrado"}, status=status.HTTP_400_BAD_REQUEST)
+                usuario_rol.id_rol = rol_aplicacion
+            
+            usuario_rol.save()
+            return Response({'update': 1})
+        except UsuarioRol.DoesNotExist:
+            return Response({'error': 'Usuario rol no encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 class RolAplicacionViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = RolAplicacionSerializer

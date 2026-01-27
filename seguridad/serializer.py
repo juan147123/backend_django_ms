@@ -43,8 +43,16 @@ class UsuarioRolAuthSerializer(serializers.ModelSerializer):
         fields = ('objeto_permitido', 'objeto_permitido_descripcion', 'pais', 'id_rol',)
 
     def get_objeto_permitido_descripcion(self, obj):
-        centro_gestion = CentroGestion.objects.filter(id=obj.objeto_permitido).first()
-        return centro_gestion.label if centro_gestion else None
+        # Validar que objeto_permitido no esté vacío y sea un número válido
+        if not obj.objeto_permitido or obj.objeto_permitido.strip() == '':
+            return None
+        
+        try:
+            objeto_permitido_id = int(obj.objeto_permitido)
+            centro_gestion = CentroGestion.objects.filter(id=objeto_permitido_id).first()
+            return centro_gestion.label if centro_gestion else None
+        except (ValueError, TypeError):
+            return None
 
 
 class AplicacionUsuarioAuthSerializer(serializers.ModelSerializer):
